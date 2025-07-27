@@ -1,0 +1,32 @@
+# Virtual Environments
+venv/
+env/
+.venv/
+.env/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Models and Cache
+models/
+*.pkl
+nltk_data/
+
+# Output files
+output.json
+
