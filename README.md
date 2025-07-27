@@ -157,8 +157,7 @@ Summary Example Commands
 ------------------------
 
 ```console  
-# Prepare directories  
-mkdir -p input output  
+
 
 # Place input.json and all PDFs into input/  
 

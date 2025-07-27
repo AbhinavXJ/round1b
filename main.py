@@ -34,23 +34,19 @@ class PersonaDrivenAnalyzer:
             raise e
 
     def extract_text_with_formatting(self, pdf_path):
-        """Extract text with formatting information - optimized for speed"""
+        """Extract text with formatting information - no page limit"""
         pages_data = {}
         
         try:
             with pdfplumber.open(pdf_path) as pdf:
-                # Limit pages for performance (60s constraint)
-                max_pages = min(20, len(pdf.pages))
+                max_pages = len(pdf.pages)  # Process all pages
                 
                 for page_num in range(max_pages):
                     page = pdf.pages[page_num]
-                    
-                    # Fast text extraction
                     page_text = page.extract_text()
                     if not page_text or len(page_text) < 30:
                         continue
                     
-                    # Simple line splitting instead of complex char analysis
                     lines = [line.strip() for line in page_text.split('\n') if line.strip()]
                     
                     if lines:
@@ -58,12 +54,12 @@ class PersonaDrivenAnalyzer:
                             'lines': [{'text': line} for line in lines],
                             'full_text': page_text
                         }
-                        
         except Exception as e:
             print(f"PDF extraction error: {e}")
             return {"pages": {}}
         
         return {"pages": pages_data}
+
 
     def extract_section_title(self, page_data):
         """Extract section title - fast heuristic approach"""
@@ -276,7 +272,6 @@ def process_collection(input_dir, output_dir):
         return False
     
     # Limit to 5 documents for 60s constraint
-    pdf_files = pdf_files[:5]
     print(f"Processing {len(pdf_files)} PDF files")
     
     all_extracted_sections = []
