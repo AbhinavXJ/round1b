@@ -8,7 +8,7 @@ To achieve this, we found a solution that avoids large, slow models and focuses 
 
 The process starts by reading a file called `input.json` that contains the persona and their task. From that, it creates a few short search phrases to figure out what kind of content would be useful for that person.
 
-Next, the system reads through up to 5 PDF documents, scanning a limited number of pages in each (to save time). For every page, it checks how similar the page’s content is to the persona's need, using sentence embeddings and a bit of keyword matching.
+Next, the system reads through up all the PDF documents, scanning all of the pages in each. For every page, it checks how similar the page’s content is to the persona's need, using sentence embeddings and a bit of keyword matching.
 
 If a page looks relevant, the system tries to find a suitable title from the first few lines. It also pulls out a short summary by picking the most useful sentences on that page.
 
